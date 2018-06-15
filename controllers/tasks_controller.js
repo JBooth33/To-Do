@@ -25,4 +25,31 @@ router.post("api/taks", function(req, res) {
     });
 });
 
+router.put("api/tasks/:id", function(req, res) {
+    var condition = "id = " + req.params.id;
+
+    console.log("condition", condition);
+
+    task.update({
+        completed: req.body.completed
+    }, condition, function(result) {
+        if (result.changedRows == 0) {
+
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
+router.delete("api/taks/:id", function(req, res) {
+    var condition = "id = " +req.params.id;
+
+    task.delete(condition, function(result) {
+        if (result.affectedRows ==0) {
+            return res.status(404).end();
+        }
+    });
+});
+
 module.exports = router;
