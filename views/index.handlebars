@@ -1,0 +1,38 @@
+<h1>To-dos!</h1>
+
+<h2>Tasks to do!</h2>
+
+<ul>
+  {{#each tasks}}
+    {{#unless completed}}
+      {{> tasks/task-block complete=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>Tasks completed!</h2>
+
+<ul>
+  {{#each tasks}}
+    {{#if completed}}
+      {{> tasks/task-block complete=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a Task</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="ca">Task:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="slee">Completed?</label><br>
+    <input type="radio" name="sleepy" value="1" checked> To be done<br>
+    <input type="radio" name="sleepy" value="0"> Complete
+  </div>
+
+  <button type="submit">Add Task</button>
+</form>
