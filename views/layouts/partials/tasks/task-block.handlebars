@@ -1,0 +1,9 @@
+<li>
+	{{name}}
+
+	<button class="change-status" data-id="{{id}}" data-newstatus="{{complete}}">
+		{{#if complete}}TASK COMPLETE!{{else}}GET CRACKING!{{/if}}
+	</button>
+
+	<button class="task-complete" data-id="{{this.id}}">DELETE!</button>
+</li>

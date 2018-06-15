@@ -6,7 +6,7 @@ var task = require("../models/task.js");
 
 //create router and export at end of file
 router.get("/", function(req, res) {
-    task.all(function(data) {
+    task.selectAll(function(data) {
         var hbsObject = {
             taks: data
         };
@@ -16,7 +16,7 @@ router.get("/", function(req, res) {
 });
 
 router.post("api/taks", function(req, res) {
-    task.create([
+    task.insertOne([
         "task_name", "completed"
     ], [
         req.body.task_name, req.body.completed
@@ -30,7 +30,7 @@ router.put("api/tasks/:id", function(req, res) {
 
     console.log("condition", condition);
 
-    task.update({
+    task.updateOne({
         completed: req.body.completed
     }, condition, function(result) {
         if (result.changedRows == 0) {
