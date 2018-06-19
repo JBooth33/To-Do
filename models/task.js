@@ -16,7 +16,7 @@ var task = {
     },
 
     updateOne: function(objColVals, condition, cb) {
-        orm.updateOne("cats", objColVals, condition, function(res) {
+        orm.updateOne("tasks", objColVals, condition, function(res) {
             cb(res);
         });
     }

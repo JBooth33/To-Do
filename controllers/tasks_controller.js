@@ -8,48 +8,35 @@ var task = require("../models/task.js");
 router.get("/", function(req, res) {
     task.selectAll(function(data) {
         var hbsObject = {
-            taks: data
+            tasks: data
         };
         console.log(hbsObject);
         res.render("index", hbsObject);
     });
 });
 
-router.post("api/taks", function(req, res) {
+router.post("/", function(req, res) {
     task.insertOne([
-        "task_name", "completed"
+        "task_name"
     ], [
-        req.body.task_name, req.body.completed
-    ], function(result) {
-        res.json({ id: result.insertID });
+        req.body.task_name
+    ], function() {
+        res.redirect("/");
     });
 });
 
-router.put("api/tasks/:id", function(req, res) {
+router.put("/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
     console.log("condition", condition);
 
     task.updateOne({
         completed: req.body.completed
-    }, condition, function(result) {
-        if (result.changedRows == 0) {
-
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
+    }, condition, function(data) {
+        res.redirect("/");
     });
 });
 
-router.delete("api/taks/:id", function(req, res) {
-    var condition = "id = " +req.params.id;
 
-    task.delete(condition, function(result) {
-        if (result.affectedRows ==0) {
-            return res.status(404).end();
-        }
-    });
-});
 
 module.exports = router;
