@@ -23,7 +23,7 @@ $(function() {
     });
 
 
-    $("#done").on("click", function (event) {
+    $(".not-completed").on("click", function (event) {
         var id = $(this).data("id");
 
         console.log(id);
@@ -32,7 +32,7 @@ $(function() {
             completed: true,
         };
 
-        $.ajax("/api/tasks/update" + id, {
+        $.ajax("/api/tasks/" + id, {
             type: "PUT",
             data: newCompletedState
         }).then(

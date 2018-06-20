@@ -18,12 +18,15 @@ router.get("/", function(req, res) {
 router.post("/api/tasks", function(req, res) {
 
     var newTask = req.body.task_name.toString();
+
+    console.log(newTask);
+
     task.insertOne("task_name", newTask, function(result) {
         res.json({ id: result.insertID });
     });
 });
 
-router.put("/api/tasks/update/:id", function(req, res) {
+router.put("/api/tasks/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
     console.log("condition", condition);
