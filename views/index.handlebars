@@ -1,57 +1,33 @@
-<h1>To-Dos!</h1>
+<div class="row">
 
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-md-offset-1">
-        <div class="panel-panel default">
-          <ul class="list-group">
-            {{#each tasks}}
-              {{#unless this.completed}}
-              <li class="list-group-item">
-                <div class="input-group">
-                  <p class="lead"> {{this.task_name}} </p>
-                  <span class="input-group-btn">
-                    <form action="tasks/update/{{this.id}}?_method=PUT" method="POST">
-                      <input type="hidden" name="completed" value="true">
-                      <button class="btn btn-default btn-lg" type="submit">Done!</button>
-                    </form>
-                  </span>
-                </div>
-              </li>
-              {{/unless}}
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="cod-md-4 cod-md-offset-2">
-        <div class="panel panel-default">
-          <ul class="list-group">
-          {{#each tasks}}
-            {{#if this.completed}}
-            <li class="list-group-item">
-              <p class="lead">{{this.task_name}}</p>
-            </li>
-            {{/if}}
-          {{/each}}
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-10 col-md-offset-1">
-      <p class="lead"> Enter the name of the task to be done and click the submit button</p>
-
-      <form class="create-update-form" action="tasks/create" method="POST">
-        <div class="form-group">
-          <textarea class="form-control input-lg" type+"text" name="task_name" rows="3"></textarea>
-        </div>
-
-        <button class="btn btn-default btn-lg" type="sumbit">Add Task!</button>
-      </form>
-    </div>
+  <div class="col-sm-6">
+    <ul>
+      {{#each tasks}} {{#unless completed}}
+      <li>
+        {{task_name}}
+        <button class="not-completed" data-id="{{id}}"> To do list </button>
+      </li>
+      {{/unless}} {{/each}}
+    </ul>
   </div>
-</main> 
+
+  <div class="col-sm-6">
+    {{#each tasks}} {{#if completed}}
+    <li>
+      {{task_name}}
+      <button class="finished" data-id="{{id}}">Done!</button>
+    </li>
+    {{/if}} {{/each}}
+  </div>
+</div>
+
+<h2>Add a Task!</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="ca">Task</label>
+    <input type="text" id="task" name="name">
+  </div>
+
+  <button type="submit" class="add-task">Submit</button>
+</form>

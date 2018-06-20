@@ -15,28 +15,41 @@ router.get("/", function(req, res) {
     });
 });
 
-router.post("/", function(req, res) {
-    task.insertOne([
-        "task_name"
-    ], [
-        req.body.task_name
-    ], function() {
-        res.redirect("/");
+router.post("/api/tasks", function(req, res) {
+
+    var newTask = req.body.task_name.toString();
+    task.insertOne("task_name", newTask, function(result) {
+        res.json({ id: result.insertID });
     });
 });
 
-router.put("/:id", function(req, res) {
+router.put("/api/tasks/update/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
     console.log("condition", condition);
 
     task.updateOne({
-        completed: req.body.completed
-    }, condition, function(data) {
-        res.redirect("/");
+        completed: true
+    }, condition, function(result) {
+        if (result.changedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
     });
 });
 
+router.delete("/api/tasks/delete/:id", function(req, res) {
+    var condition = "id = " + req.params.id;
 
+    task.deleteOne(condition, function(result) {
+        if (result.affectedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+
+});
 
 module.exports = router;
