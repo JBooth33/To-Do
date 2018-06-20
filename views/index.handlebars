@@ -1,8 +1,12 @@
+<div class="jumbotron"> 
+		<img src="/assets/images/notebook.png"> 
+		<h1> To-Do List! </h1>
+	</div>
+
 <div class="row">
 
   <div class="col-sm-6">
-    <h1>Tasks to Knock Out!</h1>
-    <ul>
+    <h1>Tasks to Knock Out</h1>
       {{#each tasks}} {{#unless completed}}
       <li>
         {{task_name}}
@@ -10,7 +14,6 @@
         <button class="delete" data-id="{{id}}"> &#10060 </button>
       </li>
       {{/unless}} {{/each}}
-    </ul>
   </div>
 
   <div class="col-sm-6">

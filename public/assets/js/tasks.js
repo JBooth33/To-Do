@@ -1,14 +1,13 @@
+
 $(function() {
+    //on-click event for adding task
     $(".add-task").on("click", function() {
         event.preventDefault();
-        console.log("Success");
         var id = $(this).data("id");
         
         var newTask = {
             task_name: $("#task").val().trim(),
         };
-
-        console.log(newTask.task_name);
 
         $.ajax("/api/tasks/", {
             type: "POST",
@@ -22,11 +21,9 @@ $(function() {
         );
     });
 
-
+//on-click event to change a task from not-completed to completed
     $(".not-completed").on("click", function (event) {
         var id = $(this).data("id");
-
-        console.log(id);
 
         var newCompletedState = {
             completed: true,
@@ -37,23 +34,22 @@ $(function() {
             data: newCompletedState
         }).then(
             function () {
-                console.log("Completed task #", id);
+                
 
                 location.reload();
             }
         );
     });
 
+//on-click event to delete a task 
     $(".finished").on("click", function (event) {
         var id = $(this).data("id");
-
-        console.log(id);
 
         $.ajax("/api/tasks/" + id, {
             type: "DELETE"
         }).then(
             function () {
-                console.log("deleted task, id");
+                
                 location.reload();
             }
         );
