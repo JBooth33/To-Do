@@ -42,7 +42,7 @@ router.put("/api/tasks/:id", function(req, res) {
     });
 });
 
-router.delete("/api/tasks/delete/:id", function(req, res) {
+router.delete("/api/tasks/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
     task.deleteOne(condition, function(result) {

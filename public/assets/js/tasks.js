@@ -44,4 +44,19 @@ $(function() {
         );
     });
 
+    $(".finished").on("click", function (event) {
+        var id = $(this).data("id");
+
+        console.log(id);
+
+        $.ajax("/api/tasks/" + id, {
+            type: "DELETE"
+        }).then(
+            function () {
+                console.log("deleted task, id");
+                location.reload();
+            }
+        );
+    });
+
 });

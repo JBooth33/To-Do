@@ -1,21 +1,24 @@
 <div class="row">
 
   <div class="col-sm-6">
+    <h1>Tasks to Knock Out!</h1>
     <ul>
       {{#each tasks}} {{#unless completed}}
       <li>
         {{task_name}}
-        <button class="not-completed" data-id="{{id}}"> To do list </button>
+        <button class="not-completed" data-id="{{id}}"> &#10004 </button>
+        <button class="delete" data-id="{{id}}"> &#10060 </button>
       </li>
       {{/unless}} {{/each}}
     </ul>
   </div>
 
   <div class="col-sm-6">
+    <h1>Tasks You've Completed</h1>
     {{#each tasks}} {{#if completed}}
     <li>
       {{task_name}}
-      <button class="finished" data-id="{{id}}">Done!</button>
+      <button class="finished" data-id="{{id}}"> &#10060 </button>
     </li>
     {{/if}} {{/each}}
   </div>

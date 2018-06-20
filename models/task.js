@@ -19,6 +19,12 @@ var task = {
         orm.updateOne("tasks", objColVals, condition, function(res) {
             cb(res);
         });
+    },
+
+    deleteOne: function(condition, cb) {
+        orm.deleteOne("tasks", condition, function(res) {
+            cb(res);
+        });
     }
 };
 // Export the database functions for the controller (catsController.js).
